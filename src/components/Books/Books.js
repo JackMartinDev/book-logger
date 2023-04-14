@@ -3,7 +3,7 @@ import BooksList from "./BookList";
 import React, { useState } from "react";
 
 const Books = () => {
-  const [bookTitle, setBookTitle] = useState("");
+  const [bookTitle, setBookTitle] = useState();
 
   const onFormSubmitHandler = (book) => {
     setBookTitle(book);
