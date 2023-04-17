@@ -51,8 +51,7 @@ const DUMMY_ARRAY = [
 const API_KEY = "AIzaSyDzkmn_Ru4htFD2tPEhMAgM8UUHiDevIM8";
 
 const BooksList = (props) => {
-  //TO DO - USE EFFECT SO IT DOESNT CONSTANTLY REFRESH
-  const [books, setBooks] = useState();
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
     let title = props.bookTitle;
@@ -62,36 +61,46 @@ const BooksList = (props) => {
       "&key=" +
       API_KEY;
 
+    //Add try and catch to prevent errors when values are not found
     fetch(API)
       .then((response) => response.json())
       .then((data) => {
-        setBooks(data.items);
-        console.log(books);
+        setBooks(
+          data.items.map((item) => {
+            let checkedImg =
+              "https://serpstat.com/files/img/34/1676542462.4999.png";
+            if ("imageLinks" in item.volumeInfo) {
+              checkedImg = item.volumeInfo.imageLinks.thumbnail;
+            }
+            return {
+              id: item.id,
+              title: item.volumeInfo.title,
+              author: item.volumeInfo.authors,
+              pageCount: item.pageCount,
+              img: checkedImg,
+            };
+          })
+        );
       });
   }, [props.bookTitle]);
 
-  const filteredArray = DUMMY_ARRAY.filter((book) =>
-    book.title.includes(props.bookTitle)
-  );
+  // const filteredArray = DUMMY_ARRAY.filter((book) =>
+  //   book.title.includes(props.bookTitle)
+  // );
 
-  let isEmpty;
-  if (filteredArray.length === 0) isEmpty = true;
-
-  //TODO ADD KEY
-
-  const booksList = filteredArray.map((book) => (
+  const booksList = books.map((book) => (
     <Book
-      id={book.id}
+      key={book.id}
       img={book.img}
       title={book.title}
       author={book.author}
-      rating={book.rating}
+      pageCount={book.pageCount}
     ></Book>
   ));
   return (
     <div className="books">
       <Card>
-        {isEmpty && <p>No books found</p>}
+        {books.length === 0 && <p>No books found</p>}
         <ul>{booksList}</ul>
       </Card>
     </div>
