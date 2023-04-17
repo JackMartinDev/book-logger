@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Book from "./Book";
 import "./BookList.css";
 import Card from "../../UI/Card";
@@ -48,8 +48,27 @@ const DUMMY_ARRAY = [
   },
 ];
 
+const API_KEY = "AIzaSyDzkmn_Ru4htFD2tPEhMAgM8UUHiDevIM8";
+
 const BooksList = (props) => {
+  //TO DO - USE EFFECT SO IT DOESNT CONSTANTLY REFRESH
   const [books, setBooks] = useState();
+
+  useEffect(() => {
+    let title = props.bookTitle;
+    const API =
+      "https://www.googleapis.com/books/v1/volumes?q=+intitle:" +
+      title +
+      "&key=" +
+      API_KEY;
+
+    fetch(API)
+      .then((response) => response.json())
+      .then((data) => {
+        setBooks(data.items);
+        console.log(books);
+      });
+  }, [props.bookTitle]);
 
   const filteredArray = DUMMY_ARRAY.filter((book) =>
     book.title.includes(props.bookTitle)

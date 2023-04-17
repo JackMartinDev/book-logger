@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import "./BooksForm.css";
+import Card from "../../UI/Card";
 
 const BooksForm = (props) => {
   const bookTitle = useRef();
@@ -9,11 +11,13 @@ const BooksForm = (props) => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      <label>Book Title: </label>
-      <input ref={bookTitle}></input>
-      <button type="submit">Search</button>
-    </form>
+    <Card>
+      <form onSubmit={onSubmitHandler}>
+        <label>Book Title: </label>
+        <input ref={bookTitle}></input>
+        <button type="submit">Search</button>
+      </form>
+    </Card>
   );
 };
 
