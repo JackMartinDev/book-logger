@@ -8,6 +8,7 @@ const Books = () => {
   const onFormSubmitHandler = (book) => {
     setBookTitle(book);
   };
+
   return (
     <React.Fragment>
       <BooksForm onSubmit={onFormSubmitHandler} />

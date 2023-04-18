@@ -11,13 +11,13 @@ const BooksForm = (props) => {
   };
 
   return (
-    <Card>
+    <div>
       <form onSubmit={onSubmitHandler}>
         <label>Book Title: </label>
         <input ref={bookTitle}></input>
         <button type="submit">Search</button>
       </form>
-    </Card>
+    </div>
   );
 };
 
