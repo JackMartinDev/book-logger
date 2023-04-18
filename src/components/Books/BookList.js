@@ -3,7 +3,7 @@ import Book from "./Book";
 import "./BookList.css";
 import Card from "../../UI/Card";
 
-const API_KEY = "AIzaSyDzkmn_Ru4htFD2tPEhMAgM8UUHiDevIM8";
+const API_KEY = "Hidden";
 
 const BooksList = (props) => {
   const [books, setBooks] = useState([]);
