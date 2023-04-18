@@ -3,51 +3,6 @@ import Book from "./Book";
 import "./BookList.css";
 import Card from "../../UI/Card";
 
-const DUMMY_ARRAY = [
-  {
-    id: "1",
-    title: "Haruhi 1",
-    author: "John",
-    rating: "2",
-    img: "http://books.google.com/books/content?id=DZQsE3HYIvQC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
-  },
-  {
-    id: "2",
-    title: "Haruhi 2",
-    author: "John",
-    rating: "2",
-    img: "http://books.google.com/books/content?id=a_c-BAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-  },
-  {
-    id: "3",
-    title: "Haruhi 3",
-    author: "John",
-    rating: "2",
-    img: "http://books.google.com/books/content?id=Dq2XJdDXuOIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-  },
-  {
-    id: "4",
-    title: "Haruhi 4",
-    author: "John",
-    rating: "2",
-    img: "http://books.google.com/books/content?id=kvmL5Ad5josC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-  },
-  {
-    id: "5",
-    title: "Haruhi 5",
-    author: "John",
-    rating: "2",
-    img: "http://books.google.com/books/content?id=mDrkgaOmjZYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-  },
-  {
-    id: "6",
-    title: "Haruhi 6",
-    author: "John",
-    rating: "2",
-    img: "http://books.google.com/books/content?id=tEuiXbsJofwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api",
-  },
-];
-
 const API_KEY = "AIzaSyDzkmn_Ru4htFD2tPEhMAgM8UUHiDevIM8";
 
 const BooksList = (props) => {
@@ -65,6 +20,7 @@ const BooksList = (props) => {
     fetch(API)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setBooks(
           data.items.map((item) => {
             let checkedImg =
@@ -76,7 +32,7 @@ const BooksList = (props) => {
               id: item.id,
               title: item.volumeInfo.title,
               author: item.volumeInfo.authors,
-              pageCount: item.pageCount,
+              pageCount: item.volumeInfo.pageCount,
               img: checkedImg,
             };
           })
