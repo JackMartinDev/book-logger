@@ -29,7 +29,6 @@ const BooksList = (props) => {
               checkedImg = item.volumeInfo.imageLinks.thumbnail;
             }
             return {
-              id: item.id,
               title: item.volumeInfo.title,
               author: item.volumeInfo.authors,
               pageCount: item.volumeInfo.pageCount,
@@ -44,9 +43,9 @@ const BooksList = (props) => {
   //   book.title.includes(props.bookTitle)
   // );
 
-  const booksList = books.map((book) => (
+  const booksList = books.map((book, index) => (
     <Book
-      key={book.id}
+      key={index}
       img={book.img}
       title={book.title}
       author={book.author}
